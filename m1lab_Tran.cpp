@@ -10,6 +10,7 @@ How much each costs
 Total cost
 */
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main() {
@@ -17,6 +18,8 @@ int main() {
     int item_count = 100;
     int purchased;
     double price_each = 0.79;
+
+    cout << setprecision(2) << fixed;
 
     cout << "Welcome to our " << item << " store!" << endl;
     cout << "We have " << item_count << " " << item << "!" << endl;
