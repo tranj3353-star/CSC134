@@ -12,7 +12,7 @@ int main() {
     string name;
     cout << "Enter your first name: ";
     cin >> name; //Input
-    cout << "Name: " + name << endl << endl;
+    cout << "Hello " + name << endl << endl;
 
     //Get and display number
     int num1;
