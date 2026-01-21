@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Asteroid Shooter</title>
+<style>
+html, body {
+  margin: 0;
+  background: #000;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+}
+#score {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  font-family: monospace;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+<div id="score">Score: 0</div>
+<canvas id="c"></canvas>
+<script>
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+function resize() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+window.onresize = resize;
+resize();
+
+// Player (small spinning cube)
+let player = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  rotation: 0
+};
+
+// Bullets (tiny spinning cubes)
+let bullets = [];
+
+// Enemies (red donuts)
+let enemies = [];
+
+// Score
+let score = 0;
+
+// Input
+const keys = {};
+window.addEventListener("keydown", e => {
+  keys[e.key] = true;
+  if (e.key === " ") {
+    shootBullet();
+  }
+});
+window.addEventListener("keyup", e => keys[e.key] = false);
+
+function shootBullet() {
+  bullets.push({
+    x: player.x,
+    y: player.y - 20,
+    rotation: 0
+  });
+}
+
+function spawnEnemy() {
+  const side = Math.floor(Math.random() * 4);
+  let x, y;
+  if (side === 0) { x = Math.random() * canvas.width; y = -50; }
+  else if (side === 1) { x = canvas.width + 50; y = Math.random() * canvas.height; }
+  else if (side === 2) { x = Math.random() * canvas.width; y = canvas.height + 50; }
+  else { x = -50; y = Math.random() * canvas.height; }
+  
+  enemies.push({
+    x, y,
+    A: 0,
+    B: 0
+  });
+}
+
+function drawCube(x, y, size, rotation) {
+  const vertices = [
+    [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+    [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]
+  ];
+  
+  const rotated = vertices.map(v => {
+    let [px, py, pz] = v;
+    // Rotate
+    let y1 = py * Math.cos(rotation) - pz * Math.sin(rotation);
+    let z1 = py * Math.sin(rotation) + pz * Math.cos(rotation);
+    let x2 = px * Math.cos(rotation) - y1 * Math.sin(rotation);
+    let y2 = px * Math.sin(rotation) + y1 * Math.cos(rotation);
+    
+    return [x + x2 * size, y + y2 * size, z1];
+  });
+  
+  const edges = [
+    [0,1],[1,2],[2,3],[3,0],
+    [4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7]
+  ];
+  
+  ctx.strokeStyle = "#0ff";
+  ctx.lineWidth = 1;
+  edges.forEach(([i, j]) => {
+    ctx.beginPath();
+    ctx.moveTo(rotated[i][0], rotated[i][1]);
+    ctx.lineTo(rotated[j][0], rotated[j][1]);
+    ctx.stroke();
+  });
+}
+
+function drawDonut(x, y, A, B, scale, color) {
+  for (let theta = 0; theta < Math.PI * 2; theta += 0.4) {
+    for (let phi = 0; phi < Math.PI * 2; phi += 0.2) {
+      const R = 0.5;
+      const r = 0.2;
+      const px = (R + r * Math.cos(theta)) * Math.cos(phi);
+      const py = (R + r * Math.cos(theta)) * Math.sin(phi);
+      const pz = r * Math.sin(theta);
+      
+      let y1 = py * Math.cos(A) - pz * Math.sin(A);
+      let z1 = py * Math.sin(A) + pz * Math.cos(A);
+      let x2 = px * Math.cos(B) - y1 * Math.sin(B);
+      let y2 = px * Math.sin(B) + y1 * Math.cos(B);
+      
+      const depth = 1 / (z1 + 6);
+      const drawX = x + x2 * scale * depth * 30;
+      const drawY = y + y2 * scale * depth * 30;
+      
+      const lum = Math.max(0, depth * 3);
+      ctx.fillStyle = `rgb(${color[0] * lum},${color[1] * lum},${color[2] * lum})`;
+      ctx.fillRect(drawX, drawY, 2, 2);
+    }
+  }
+}
+
+function loop() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Player movement
+  const speed = 5;
+  if (keys["w"] || keys["ArrowUp"]) player.y -= speed;
+  if (keys["s"] || keys["ArrowDown"]) player.y += speed;
+  if (keys["a"] || keys["ArrowLeft"]) player.x -= speed;
+  if (keys["d"] || keys["ArrowRight"]) player.x += speed;
+  
+  player.x = Math.max(20, Math.min(canvas.width - 20, player.x));
+  player.y = Math.max(20, Math.min(canvas.height - 20, player.y));
+  
+  player.rotation += 0.05;
+  drawCube(player.x, player.y, 10, player.rotation);
+  
+  // Update bullets
+  bullets = bullets.filter(b => {
+    b.y -= 8;
+    b.rotation += 0.15;
+    drawCube(b.x, b.y, 3, b.rotation);
+    return b.y > -20;
+  });
+  
+  // Update enemies
+  enemies = enemies.filter(e => {
+    const dx = player.x - e.x;
+    const dy = player.y - e.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const moveSpeed = 1.5;
+    e.x += (dx / dist) * moveSpeed;
+    e.y += (dy / dist) * moveSpeed;
+    e.A += 0.03;
+    e.B += 0.02;
+    
+    const scale = Math.min(canvas.width, canvas.height) * 0.015;
+    drawDonut(e.x, e.y, e.A, e.B, scale, [255, 50, 50]);
+    
+    // Check collision with bullets
+    for (let i = bullets.length - 1; i >= 0; i--) {
+      const b = bullets[i];
+      const bdx = b.x - e.x;
+      const bdy = b.y - e.y;
+      if (Math.sqrt(bdx * bdx + bdy * bdy) < 25) {
+        bullets.splice(i, 1);
+        score += 10;
+        document.getElementById("score").textContent = "Score: " + score;
+        return false;
+      }
+    }
+    
+    // Check collision with player
+    if (dist < 30) {
+      score = Math.max(0, score - 50);
+      document.getElementById("score").textContent = "Score: " + score;
+      return false;
+    }
+    
+    return e.x > -100 && e.x < canvas.width + 100 && 
+           e.y > -100 && e.y < canvas.height + 100;
+  });
+  
+  // Spawn enemies
+  if (Math.random() < 0.02) {
+    spawnEnemy();
+  }
+  
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>
