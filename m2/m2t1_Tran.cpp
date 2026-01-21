@@ -19,6 +19,14 @@ int main() {
     int purchased;
     double price_each;
 
+    cout << "Welcome to the store setup program. " << endl;
+    cout << "Name of item?: ";
+    cin >> item_name;
+    cout << "Number of items?: ";
+    cin >> item_count;
+    cout << "Price each?: ";
+    cin >> price_each;
+
     cout << setprecision(2) << fixed;
 
     cout << "Welcome to our " << item_name << " store!" << endl;
