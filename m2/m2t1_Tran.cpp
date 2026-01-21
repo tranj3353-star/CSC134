@@ -21,7 +21,7 @@ int main() {
 
     cout << "Welcome to the store setup program. " << endl;
     cout << "Name of item?: ";
-    cin >> item_name;
+    getline(cin, item_name);
     cout << "Number of items?: ";
     cin >> item_count;
     cout << "Price each?: ";
