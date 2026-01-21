@@ -1,10 +1,10 @@
 //CSC 134
-//M1LAB - Sales
+//M2T1 - Sales
 //Justin Tran
-//1/14/26
+//1/21/26
 
 /*
-We're selling bananas
+We're selling stuff
 Tell users how much you have
 How much each costs
 Total cost
