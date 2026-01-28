@@ -29,11 +29,17 @@ int main()
 
     //Calculations
     volume = length * width * height;
+    cost = volume * COST_PER_CUBIC_FOOT;
+    customer_price = volume * CHARGE_PER_CUBIC_FOOT;
+    profit = customer_price - cost;
 
     //Outputs
     cout << setprecision(2) << fixed;
     cout << "\n ----- Crate Info ----- \n";
     cout << "Volume: " << volume << " cubic ft. " << endl;
+    cout << "Cost to make: $" << cost << endl;
+    cout << "Retail price: $" << customer_price << endl;
+    cout << "Profit:       $" << profit << endl;
 
     return 0;
 }
