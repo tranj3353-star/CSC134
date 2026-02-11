@@ -79,6 +79,13 @@ int main()
     cout << endl << "Number of leftovers: " << pizza_remainder << endl << endl;
 
     cout << "---Question 4---" << endl;
+    string school = "FTCC";
+    string team = "Trojans";
+    string letsGo = "Let's Go";
+    string cheerOne = letsGo + " " + school;
+    string cheerTwo = letsGo + " " + team;
+
+    cout << cheerOne << endl << cheerOne << endl << cheerOne << endl << cheerTwo << endl;
 
     return 0;
 }
