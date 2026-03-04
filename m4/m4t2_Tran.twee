@@ -1,0 +1,115 @@
+:: StoryTitle
+Zombie Apocalypse Choice Game
+
+:: StoryData
+{
+  "ifid": "B1234567-89AB-4CDE-F012-222222222222",
+  "format": "SugarCube",
+  "format-version": "2.36.1",
+  "start": "Intro"
+}
+
+:: Intro
+
+Scenario:
+
+You're 3 months into a zombie apocalypse. You're with your family and your best friend's family.
+
+Your best friend confesses to you that he got bitten.
+
+[[ (0) Inform the residents of your best friend's situation.->DeadEnd1 ]]
+[[ (1) Reassure your friend then kill him in his sleep.->Correct1 ]]
+
+:: DeadEnd1
+
+Death: His family panics and shoots you before you can explain.
+
+**GAME OVER**
+
+[[Restart->Intro]]
+
+:: DeadEnd2
+
+Death: The smell attracts zombies. The house is overrun.
+
+**GAME OVER**
+
+[[Restart->Intro]]
+
+:: DeadEnd3
+
+Death: You search the store and trigger a silent alarm. A swarm traps you inside.
+
+**GAME OVER**
+
+[[Restart->Intro]]
+
+:: DeadEnd4
+
+Death: The strangers on the radio trace your signal. They're raiders.
+
+**GAME OVER**
+
+[[Restart->Intro]]
+
+:: DeadEnd5
+
+Death: You refuse to open the gates in time. The herd breaks through.
+
+**GAME OVER**
+
+[[Restart->Intro]]
+
+:: Correct1
+
+You do it. He goes peacefully in his sleep.
+
+Now you need to hide his body.
+
+[[ (0) Bury him secretly out past the treeline.->Correct2 ]]
+[[ (1) Hide the body in the basement.->DeadEnd2 ]]
+
+:: Correct2
+
+You bury him deep in the woods before dawn.
+
+On your way back, you spot a small herd heading toward the house.
+
+[[ (0) Search the nearby store for supplies before they arrive.->DeadEnd3 ]]
+[[ (1) Return home and warn everyone.->Correct3 ]]
+
+:: Correct3
+
+You rush back and warn everyone.
+
+Barricades go up. The herd pounds at the doors but can't get in.
+
+Food is running dangerously low now.
+
+[[ (0) Ration what little food remains.->DeadEnd3 ]]
+[[ (1) Make a supply run to the nearby grocery store.->Correct4 ]]
+
+:: Correct4
+
+You and two others carefully clear the grocery store.
+
+In the manager's office, you find a working radio broadcasting a survivor signal.
+
+[[ (0) Ignore the signal and focus on supplies.->Correct5 ]]
+[[ (1) Respond to the signal cautiously.->DeadEnd4 ]]
+
+:: Correct5
+
+You respond carefully, giving no exact location.
+
+The voice offers a secure camp with armed guards and farmland.
+
+After scouting it for days, you confirm it's real.
+
+Your group relocates safely.
+
+You survived — for now.
+
+**ENDING: SURVIVED**
+
+[[Play Again->Intro]]
