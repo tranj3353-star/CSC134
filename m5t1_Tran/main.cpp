@@ -6,11 +6,8 @@ Show off different function types
 */
 
 #include <iostream>
+#include "m5t1.h"
 using namespace std;
-
-void say_hi();
-int show_answer();
-double square_number(double num);
 
 int main()
 {
@@ -21,20 +18,4 @@ int main()
     cin >> numInput;
     cout << "Squared is " << square_number(numInput) << endl;
     return 0;
-}
-
-void say_hi()
-{
-    cout << "Hello world!" << endl;
-    return;
-}
-
-int show_answer()
-{
-    return 42;
-}
-
-double square_number(double num)
-{
-    return num * num;
 }
