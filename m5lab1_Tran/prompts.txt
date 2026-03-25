@@ -1,3 +1,5 @@
+g++ main.cpp src/renderer.cpp -o game
+
 For the first time, we'll be making a full application which is made of multiple functions, each which do one thing.
 The purpose of the application is a "Choose Your Own Adventure" where the user makes choices to play through a simple story.
 You'll want to use this basic structure, and expand on it. 
