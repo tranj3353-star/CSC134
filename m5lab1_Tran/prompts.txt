@@ -1,0 +1,21 @@
+For the first time, we'll be making a full application which is made of multiple functions, each which do one thing.
+The purpose of the application is a "Choose Your Own Adventure" where the user makes choices to play through a simple story.
+You'll want to use this basic structure, and expand on it. 
+For the first time, we'll be making a full application which is made of multiple functions, each which do one thing.
+The purpose of the application is a "Choose Your Own Adventure" where the user makes choices to play through a simple story.
+You'll want to use this basic structure, and expand on it.
+ideas? dont just want a multiple choice adventure... and dont wanna have a full breadth adventure bc thats way too much.... what mechanics
+1. State-Based Story (instead of huge branching)
+Instead of branching into completely different paths, track a few variables:
+health
+trust (with a character)
+money/resources
+fear/sanity
+Then reuse scenes but change outcomes based on state
+Example:
+If trust > 5, the guard lets you pass
+If health < 3, you collapse during travel
+👉 This keeps your story mostly linear but feels reactive.
+Agreed: Game Loop
+
+ok gimme a renderer.cpp file... needs to be compatible with github vscode codespace this is for a turn based console game... what it needs to do is be able to clear the screen.... and other
