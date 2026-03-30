@@ -6,6 +6,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include "renderer.h"
 
 namespace renderer {
 
@@ -26,13 +27,13 @@ namespace renderer {
     }
 
     // Draws a horizontal line
-    void drawHorizontalLine(int x, int y, int length, char ch = '-') {
+    void drawHorizontalLine(int x, int y, int length, char ch) {
         moveCursor(x, y);
         for (int i = 0; i < length; ++i) std::cout << ch;
     }
 
     // Draws a vertical line
-    void drawVerticalLine(int x, int y, int height, char ch = '|') {
+    void drawVerticalLine(int x, int y, int height, char ch) {
         for (int i = 0; i < height; ++i) {
             moveCursor(x, y + i);
             std::cout << ch;

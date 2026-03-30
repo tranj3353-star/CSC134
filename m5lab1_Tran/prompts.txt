@@ -1,4 +1,5 @@
-g++ main.cpp src/renderer.cpp -o game
+g++ main.cpp src/renderer.cpp src/input.cpp -Iinclude -o game
+g++ main.cpp src/*.cpp -Iinclude -o game
 
 For the first time, we'll be making a full application which is made of multiple functions, each which do one thing.
 The purpose of the application is a "Choose Your Own Adventure" where the user makes choices to play through a simple story.
