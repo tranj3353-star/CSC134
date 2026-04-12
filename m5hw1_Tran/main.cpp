@@ -23,7 +23,34 @@ int main()
 
     while (true)
     {
-        
+        int choice;
+        cout << "Choose 1-6 (6 is quit): ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1: {
+                questionOne();
+                break;}
+            case 2: {
+                questionTwo();
+                break;}
+            case 3: {
+                questionThree();
+                break;}
+            case 4:
+                questionFour();
+                break;
+            case 5: 
+                questionFive();
+                break;
+            case 6:
+                return 1;
+                break;
+            default:
+                cout << "ERROR! invalid option!" << endl;
+                break;
+        }
     }
     
 
