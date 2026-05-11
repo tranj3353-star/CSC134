@@ -1,0 +1,5 @@
+Go to Open Folder and Open the PROJECT Folder
+Then in the console run ./app
+If needed you can reduce terminal font 
+size via settings and search bar (10-14)
+Make sure you fully stretch the console to fill the screen. 

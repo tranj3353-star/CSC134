@@ -43,8 +43,8 @@ Describe what happens from the moment the user runs the program to when they qui
 
 **Main path:**
 
-1. Run program file
-2. Program plays with player input
+1. Run app file
+2. Program plays
 3. Program ends and exits automatically
 
 **Key branches:**
