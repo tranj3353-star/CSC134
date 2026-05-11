@@ -20,13 +20,7 @@ We all know the standard Bad Apple implementations, but 3D Bad Apple is a lot mo
 
 List every piece of data your program tracks. For each, note its type and what changes it.
 
-| Data | Type | What Changes It |
-|---|---|---|
-| *Example: player health* | *int* | *Taking damage, using potions, resting* |
-| *Example: inventory items* | *array of strings* | *Picking up items, dropping, using* |
-| | | |
-| | | |
-| | | |
+It tracks the current pixels on queue to be drawn next frame. 
 
 > **Track C note:** Use plain-language types (number, text, list, true/false). The thinking matters more than the syntax.
 
@@ -36,13 +30,8 @@ List every piece of data your program tracks. For each, note its type and what c
 
 Break your program into pieces. Each piece does one job.
 
-| Function or Component | What It Does | Inputs | Outputs |
-|---|---|---|---|
-| *Example: displayMenu()* | *Shows main menu, gets user choice* | *none* | *int (menu choice)* |
-| *Example: loadInventory()* | *Reads items from save file* | *filename* | *populated array* |
-| | | | |
-| | | | |
-| | | | |
+drawFrame() - Draws entire frame from array. 
+drawPixel(x, y) - Modify one element of array at specific x, y location. 
 
 > Aim for at least 5 entries at B tier, 7+ at A tier. If a function does two unrelated things, split it.
 
@@ -54,11 +43,9 @@ Describe what happens from the moment the user runs the program to when they qui
 
 **Main path:**
 
-1. 
-2. 
-3. 
-4. 
-5. 
+1. Run program file
+2. Program plays with player input
+3. Program ends and exits automatically
 
 **Key branches:**
 
@@ -72,13 +59,9 @@ Describe what happens from the moment the user runs the program to when they qui
 
 List at least 3 things that could break or confuse the user. For each, state your plan.
 
-| Risk | Plan |
-|---|---|
-| *Example: User enters text when a number is expected* | *Input validation loop with clear error message* |
-| *Example: Save file is missing on first run* | *Check if file exists; if not, start with empty state* |
-| | |
-| | |
-| | |
+1. 3D effects might not be clear in ASCII. Solution is to just remove it. 
+2. Audio might not work in codespace. Solution is to not have audio. 
+3. Window might be too small for the program. Solution is to shrink resolution. 
 
 ---
 
@@ -86,12 +69,10 @@ List at least 3 things that could break or confuse the user. For each, state you
 
 Be specific. "Help me code it" is not a plan. Good entries name the *task* and the *reason*.
 
-| Task | Why AI Help Makes Sense |
-|---|---|
-| *Example: Write the file-parsing function* | *I understand the logic but string splitting syntax is fiddly* |
-| *Example: Suggest a cleaner way to organize my menu* | *My current version has too many nested ifs* |
-| | |
-| | |
+1. Write parser of data.bin.
+2. Make data.bin from an mp4 file. 
+3. Write RLE-DELTA Compression Algorithm. 
+4. Make Grid and Render Class.
 
 ---
 
@@ -99,8 +80,8 @@ Be specific. "Help me code it" is not a plan. Good entries name the *task* and t
 
 Name at least 2 parts you'll write or solve without AI assistance. These should be things where the struggle is the learning.
 
-1. 
-2. 
+1. I will give it the specific algorithms to use. 
+2. I will do the file splitting/chunking so its not one massive file. 
 
 ---
 
@@ -109,9 +90,11 @@ Name at least 2 parts you'll write or solve without AI assistance. These should 
 Answer honestly:
 
 - Can I build the C-tier version in one focused work session? **yes / no / unsure**
+Yes
 - Does every feature in my plan connect to the core interaction? **yes / no**
+Yes
 - Have I cut anything that's "nice to have" but not essential? **yes / no**
-
+No
 > If you answered "no" or "unsure" to the first question, your scope is too large. Cut features until the answer is yes, then add B/A tier features as stretch goals.
 
 ---
