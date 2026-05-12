@@ -11,8 +11,8 @@ namespace renderer
 
     void clearScreen()
     {
-        // ANSI escape sequence
-        std::cout << "\x1B[2J\x1B[H";
+        // move cursor to top-left only
+        std::cout << "\x1B[H";
     }
 
     void draw(const Grid& grid)
